@@ -241,3 +241,62 @@ a
         "printer_id": 1
     }
     ```
+---
+
+# Order Management API
+
+## 1. **Create Order**
+### Endpoint: `POST /tamphuc/api/order/create_order.php`
+- **Request Body (raw JSON):**
+    ```json
+    {
+        "session_token": "your_session_token_here",
+        "customer_id": 1,
+        "recipient_name": "John Doe",
+        "recipient_phone": "1234567890",
+        "delivery_address": "123 Main St, Hanoi",
+        "order_status": 1,
+        "notes": "Urgent order",
+        "product_details": [
+            {
+                "product_code": "SP001",
+                "quantity": 10
+            },
+            {
+                "product_code": "SP002",
+                "quantity": 5
+            }
+        ]
+    }
+    ```
+
+## 2. **Get Order**
+### Endpoint: `POST /tamphuc/api/order/get_order.php`
+- **Request Body (raw JSON):**
+    ```json
+    {
+        "session_token": "your_session_token_here",
+        "order_id": 1
+    }
+    ```
+
+## 3. **Update Order Status**
+### Endpoint: `POST /tamphuc/api/order/update_order_status.php`
+- **Request Body (raw JSON):**
+    ```json
+    {
+        "session_token": "your_session_token_here",
+        "order_id": 1,
+        "order_status": 2
+    }
+    ```
+
+## 4. **Delete Order**
+### Endpoint: `POST /tamphuc/api/order/delete_order.php`
+- **Request Body (raw JSON):**
+    ```json
+    {
+        "session_token": "your_session_token_here",
+        "order_id": 1
+    }
+    ```
