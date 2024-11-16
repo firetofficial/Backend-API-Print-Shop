@@ -3,26 +3,20 @@ require_once '../config/database.php';
 
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit;
+}
+
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    if (isset($_GET["username"]) && isset($_GET["password"])) {
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
-        $stmt->execute([$_GET['username']]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($user && password_verify($_GET['password'], $user['password'])) {
-            echo json_encode($user);
-        } else {
-            http_response_code(401);
-            echo json_encode(['error' => 'Invalid credentials']);
-        }
-    } else {
-        http_response_code(400);
-        echo json_encode(['error' => 'Username and password are required']);
-    }
+    http_response_code(405);
+    echo json_encode(['error' => 'Method not allowed']);
     exit;
 }
 
@@ -63,7 +57,8 @@ try {
         'success' => true,
         'session_token' => $session_token,
         'permissions' => json_decode($user['permissions']),
-        'user_id' => $user['id']
+        'user_id' => $user['id'],
+        'username' => $user['username']
     ]);
 } catch (PDOException $e) {
     http_response_code(500);
