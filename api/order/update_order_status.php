@@ -2,10 +2,14 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/tamphuc/config/database.php';
 
 $data = json_decode(file_get_contents('php://input'), true);
+
+// Lấy dữ liệu từ request
 $session_token = $data['session_token'] ?? '';
 $order_id = $data['order_id'] ?? '';
 $order_status = $data['order_status'] ?? '';
+$printing_company_id = $data['printing_company_id'] ?? '';
 
+// Kiểm tra quyền người dùng
 function checkUserRole($session_token, $feature) {
     global $pdo;
     if (empty($session_token) || empty($feature)) {
@@ -27,10 +31,20 @@ if (!$roleCheck['success'] || !$roleCheck['access_granted']) {
     exit;
 }
 
-// Cập nhật trạng thái đơn hàng
-$sql = "UPDATE orders SET order_status = ? WHERE order_id = ?";
-$stmt = $pdo->prepare($sql);
-$stmt->execute([$order_status, $order_id]);
+// Kiểm tra dữ liệu đầu vào
+if (empty($order_id) || empty($order_status) || empty($printing_company_id)) {
+    echo json_encode(['success' => false, 'message' => 'Thiếu dữ liệu yêu cầu']);
+    exit;
+}
 
-echo json_encode(['success' => true, 'message' => 'Trạng thái đơn hàng đã được cập nhật']);
+// Cập nhật trạng thái đơn hàng và id nhà in
+$sql = "UPDATE orders SET order_status = ?, printing_company_id = ? WHERE order_id = ?";
+$stmt = $pdo->prepare($sql);
+$updateResult = $stmt->execute([$order_status, $printing_company_id, $order_id]);
+
+if ($updateResult) {
+    echo json_encode(['success' => true, 'message' => 'Trạng thái đơn hàng và nhà in đã được cập nhật']);
+} else {
+    echo json_encode(['success' => false, 'message' => 'Lỗi khi cập nhật đơn hàng']);
+}
 ?>

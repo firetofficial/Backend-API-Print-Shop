@@ -287,7 +287,8 @@ d
     {
         "session_token": "your_session_token_here",
         "order_id": 1,
-        "order_status": 2
+        "order_status": 2,
+        "printing_company_id": 3
     }
     ```
 
