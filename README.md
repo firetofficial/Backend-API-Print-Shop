@@ -301,3 +301,128 @@ d
         "order_id": 1
     }
     ```
+# Order Status Management API
+
+## 1. **Add Order Status**
+### Endpoint: `POST /tamphuc/api/order_status.php`
+- **Request Headers:**
+    - `Content-Type: application/json`
+- **Request Body:**
+    ```json
+    {
+        "session_token": "your-session-token",
+        "status_name": "Đang báo giá",
+        "description": "Khách hàng đang được báo giá sản phẩm"
+    }
+    ```
+- **Response:**
+    ```json
+    {
+        "success": true,
+        "message": "Order status added successfully"
+    }
+    ```
+
+## 2. **Update Order Status**
+### Endpoint: `PUT /tamphuc/api/order_status.php`
+- **Request Headers:**
+    - `Content-Type: application/json`
+- **Request Body:**
+    ```json
+    {
+        "session_token": "your-session-token",
+        "id": 1,
+        "status_name": "Đang xử lý",
+        "description": "Đơn hàng đang được xử lý"
+    }
+    ```
+- **Response:**
+    ```json
+    {
+        "success": true,
+        "message": "Order status updated successfully"
+    }
+    ```
+
+## 3. **Delete Order Status**
+### Endpoint: `DELETE /tamphuc/api/order_status.php`
+- **Request Headers:**
+    - `Content-Type: application/json`
+- **Request Body:**
+    ```json
+    {
+        "session_token": "your-session-token",
+        "id": 1
+    }
+    ```
+- **Response:**
+    ```json
+    {
+        "success": true,
+        "message": "Order status deleted successfully"
+    }
+    ```
+
+---
+
+# Category Management API
+
+## 1. **Add Category**
+### Endpoint: `POST /tamphuc/api/categories.php`
+- **Request Headers:**
+    - `Content-Type: application/json`
+- **Request Body:**
+    ```json
+    {
+        "session_token": "your-session-token",
+        "category_name": "Điện tử",
+        "description": "Các sản phẩm thuộc nhóm điện tử"
+    }
+    ```
+- **Response:**
+    ```json
+    {
+        "success": true,
+        "message": "Category added successfully"
+    }
+    ```
+
+## 2. **Update Category**
+### Endpoint: `PUT /tamphuc/api/categories.php`
+- **Request Headers:**
+    - `Content-Type: application/json`
+- **Request Body:**
+    ```json
+    {
+        "session_token": "your-session-token",
+        "id": 1,
+        "category_name": "Đồ gia dụng",
+        "description": "Các sản phẩm thuộc nhóm đồ gia dụng"
+    }
+    ```
+- **Response:**
+    ```json
+    {
+        "success": true,
+        "message": "Category updated successfully"
+    }
+    ```
+
+## 3. **Delete Category**
+### Endpoint: `DELETE /tamphuc/api/categories.php`
+- **Request Headers:**
+    - `Content-Type: application/json`
+- **Request Body:**
+    ```json
+    {
+        "session_token": "your-session-token",
+        "id": 1
+    }
+    ```
+- **Response:**
+    ```json
+    {
+        "success": true,
+        "message": "Category deleted successfully"
+    }
+    ```
