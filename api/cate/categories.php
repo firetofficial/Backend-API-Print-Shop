@@ -30,7 +30,7 @@ function checkUserRole($session_token, $feature) {
 // Lấy dữ liệu từ body
 $data = json_decode(file_get_contents('php://input'), true);
 $session_token = $data['session_token'] ?? '';
-$roleCheck = checkUserRole($session_token, 'manage_categories');
+$roleCheck = checkUserRole($session_token, 'write');
 if (!$roleCheck['success'] || !$roleCheck['access_granted']) {
     echo json_encode(['success' => false, 'message' => 'Bạn không có quyền truy cập']);
     exit;

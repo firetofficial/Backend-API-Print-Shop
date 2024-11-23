@@ -426,3 +426,196 @@ d
         "message": "Category deleted successfully"
     }
     ```
+# Product Management API
+
+## 1. **Add Product (One Price)**
+### Endpoint: `POST /tamphuc/product/qlsp.php`
+- **Request Headers:**
+    - `Content-Type: application/json`
+- **Request Body:**
+    ```json
+    {
+        "session_token": "your-session-token",
+        "category_id": 1,
+        "product_name": "Couche 150gsm",
+        "rules": "Quy cách chuẩn in giấy",
+        "notes": "Sản phẩm thông dụng",
+        "nhieuquycach": false,
+        "pricing": [
+            {
+                "quantity": 10,
+                "price": 16000
+            }
+        ]
+    }
+    ```
+- **Response:**
+    ```json
+    {
+        "success": true,
+        "message": "Product added successfully"
+    }
+    ```
+
+## 2. **Add Product (Multiple Prices)**
+### Endpoint: `POST /tamphuc/product/qlsp.php`
+- **Request Headers:**
+    - `Content-Type: application/json`
+- **Request Body:**
+    ```json
+    {
+        "session_token": "your-session-token",
+        "category_id": 1,
+        "product_name": "Couche 200gsm",
+        "rules": "Quy cách chuẩn in giấy",
+        "notes": "Sản phẩm cao cấp",
+        "nhieuquycach": true,
+        "pricing": [
+            {
+                "quantity": 10,
+                "price": 17000,
+                "note": "Giá lẻ"
+            },
+            {
+                "quantity": 50,
+                "price": 7500,
+                "note": "Giá sỉ"
+            }
+        ]
+    }
+    ```
+- **Response:**
+    ```json
+    {
+        "success": true,
+        "message": "Product added successfully"
+    }
+    ```
+
+## 3. **Edit Product**
+### Endpoint: `PUT /tamphuc/product/qlsp.php`
+- **Request Headers:**
+    - `Content-Type: application/json`
+- **Request Body:**
+    ```json
+    {
+        "session_token": "your-session-token",
+        "id": 1,
+        "category_id": 1,
+        "product_name": "Couche 150gsm Updated",
+        "rules": "Quy cách chuẩn in giấy",
+        "notes": "Sản phẩm thông dụng đã cập nhật",
+        "nhieuquycach": false,
+        "pricing": [
+            {
+                "quantity": 10,
+                "price": 16000
+            }
+        ]
+    }
+    ```
+- **Response:**
+    ```json
+    {
+        "success": true,
+        "message": "Product updated successfully"
+    }
+    ```
+
+## 4. **Delete Product**
+### Endpoint: `DELETE /tamphuc/product/qlsp.php`
+- **Request Headers:**
+    - `Content-Type: application/json`
+- **Request Body:**
+    ```json
+    {
+        "session_token": "your-session-token",
+        "id": 1
+    }
+    ```
+- **Response:**
+    ```json
+    {
+        "success": true,
+        "message": "Product deleted successfully"
+    }
+    ```
+
+## 5. **Get All Products**
+### Endpoint: `GET /tamphuc/product/show_products.php`
+- **Request Headers:**
+    - `Content-Type: application/json`
+- **Query Parameters:**
+    - `session_token`: (User session token)
+- **Response:**
+    ```json
+    {
+        "success": true,
+        "products": [
+            {
+                "id": 1,
+                "product_name": "Couche 150gsm",
+                "rules": "Quy cách chuẩn in giấy",
+                "notes": "Sản phẩm thông dụng",
+                "multiple_pricing": false,
+                "category_name": "Giấy Couche",
+                "pricing": [
+                    {
+                        "quantity": 10,
+                        "price": 16000,
+                        "note": "Giá lẻ"
+                    }
+                ]
+            },
+            {
+                "id": 2,
+                "product_name": "Couche 200gsm",
+                "rules": "Quy cách chuẩn in giấy",
+                "notes": "Sản phẩm cao cấp",
+                "multiple_pricing": true,
+                "category_name": "Giấy Couche",
+                "pricing": [
+                    {
+                        "quantity": 10,
+                        "price": 17000,
+                        "note": "Giá lẻ"
+                    },
+                    {
+                        "quantity": 50,
+                        "price": 7500,
+                        "note": "Giá sỉ"
+                    }
+                ]
+            }
+        ]
+    }
+    ```
+
+## 6. **Get Product Details By ID**
+### Endpoint: `GET /tamphuc/product/show_product_by_id.php`
+- **Request Headers:**
+    - `Content-Type: application/json`
+- **Query Parameters:**
+    - `session_token`: (User session token)
+    - `product_id`: (Product ID to view details)
+- **Response:**
+    ```json
+    {
+        "success": true,
+        "product": {
+            "id": 1,
+            "product_name": "Couche 150gsm",
+            "rules": "Quy cách chuẩn in giấy",
+            "notes": "Sản phẩm thông dụng",
+            "multiple_pricing": false,
+            "category_name": "Giấy Couche",
+            "pricing": [
+                {
+                    "quantity": 10,
+                    "price": 16000,
+                    "note": "Giá lẻ"
+                }
+            ]
+        }
+    }
+    ```
