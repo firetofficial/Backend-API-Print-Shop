@@ -364,6 +364,18 @@ d
         "order_id": 1
     }
     ```
+## 5. **Get Orders**
+### Endpoint: `POST /tamphuc/api/order/get_orders.php`
+
+- **Request Body (raw JSON):**
+    ```json
+    {
+        "session_token": "your_session_token_here",
+        "page": 1,
+        "limit": 10
+    }
+    ```
+
 # Order Status Management API
 
 ## 1. **Add Order Status**
@@ -706,5 +718,47 @@ d
                 }
             ]
         }
+    }
+    ```
+## 7. **Check Product Orders**
+### Endpoint: `POST /tamphuc/product/check_product_orders.php`
+- **Request Headers:**
+    - `Content-Type: application/json`
+- **Request Body:**
+    - `session_token`: (User session token to verify the request)
+    - `product_name`: (The name of the product to check for in orders, case-insensitive)
+
+- **Response:**
+    - **Success**:
+    ```json
+    {
+        "success": true,
+        "message": "Orders found for the product",
+        "orders": [
+            {
+                "order_id": 1,
+                "customer_id": 2,
+                "recipient_name": "John Doe",
+                "recipient_phone": "1234567890",
+                "delivery_address": "123 Main St, Hanoi",
+                "order_date": "2024-11-24 10:00:00",
+                "order_status": 1,
+                "notes": "Urgent order",
+                "product_details": "[{\"product_code\": \"SP001\", \"quantity\": 10}]",
+                "printing_company_id": null
+            },
+            {
+                "order_id": 2,
+                "customer_id": 3,
+                "recipient_name": "Jane Doe",
+                "recipient_phone": "0987654321",
+                "delivery_address": "456 Other St, Hanoi",
+                "order_date": "2024-11-25 14:00:00",
+                "order_status": 1,
+                "notes": "Standard delivery",
+                "product_details": "[{\"product_code\": \"SP001\", \"quantity\": 20}]",
+                "printing_company_id": 1
+            }
+        ]
     }
     ```
