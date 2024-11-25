@@ -89,6 +89,69 @@ d
         "access_granted": true
     }
     ```
+## 5. **Get All Employee Accounts**
+### Endpoint: `GET /tamphuc/api/get_all_accounts.php`
+- **Request Headers:**
+    - `Authorization: <session_token>`
+    - `Content-Type: application/json`
+- **Response:**
+    ```json
+    {
+        "success": true,
+        "accounts": [
+            {
+                "id": 1,
+                "username": "admin",
+                "permissions": {
+                    "all": true,
+                    "read": true,
+                    "write": true,
+                    "delete": true
+                },
+                "created_at": "2024-01-01 10:00:00"
+            },
+            {
+                "id": 2,
+                "username": "user1",
+                "permissions": {
+                    "read": true,
+                    "write": false,
+                    "delete": false
+                },
+                "created_at": "2024-01-02 11:00:00"
+            }
+        ]
+    }
+    ```
+
+---
+
+## 6 **Update Employee Account**
+### Endpoint: `PUT /tamphuc/api/update_account.php`
+- **Request Headers:**
+    - `Authorization: <session_token>`
+    - `Content-Type: application/json`
+- **Request Body:**
+    ```json
+    {
+        "user_id": 2,
+        "username": "new_username",
+        "password": "new_password",
+        "permissions": {
+            "read": true,
+            "write": true,
+            "delete": false
+        }
+    }
+    ```
+- **Response:**
+    ```json
+    {
+        "success": true,
+        "message": "User information updated successfully"
+    }
+    ```
+
 
 ---
 
