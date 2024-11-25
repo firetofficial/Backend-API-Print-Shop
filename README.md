@@ -489,6 +489,32 @@ d
         "message": "Category deleted successfully"
     }
     ```
+## 4. **Get All Categories**
+### Endpoint: `GET /tamphuc/api/categories.php`
+- **Request Headers:**
+    - `Authorization: <session_token>`
+    - `Content-Type: application/json`
+- **Response:**
+    ```json
+    {
+        "success": true,
+        "categories": [
+            {
+                "id": 1,
+                "category_name": "Giấy",
+                "description": "ChUyêN fr0ntEnD IT =))))))"
+            },
+            {
+                "id": 2,
+                "category_name": "giấy",
+                "description": "Các sản phẩm thuộc nhóm thời trang"
+            }
+        ]
+    }
+    ```
+
+
+
 # Product Management API
 
 ## 1. **Add Product (One Price)**

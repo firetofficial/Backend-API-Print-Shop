@@ -29,8 +29,8 @@ function checkUserRole($session_token, $feature) {
 
 // Lấy dữ liệu từ body
 $data = json_decode(file_get_contents('php://input'), true);
-$session_token = $data['session_token'] ?? '';
-$roleCheck = checkUserRole($session_token, 'write');
+$session_token = $_SERVER['HTTP_AUTHORIZATION'] ?? ($data['session_token'] ?? '');
+$roleCheck = checkUserRole($session_token, 'all');
 if (!$roleCheck['success'] || !$roleCheck['access_granted']) {
     echo json_encode(['success' => false, 'message' => 'Bạn không có quyền truy cập']);
     exit;
@@ -39,6 +39,12 @@ if (!$roleCheck['success'] || !$roleCheck['access_granted']) {
 $method = $_SERVER['REQUEST_METHOD'];
 
 switch ($method) {
+    case 'GET': // Lấy danh sách danh mục
+        $stmt = $pdo->query("SELECT id, category_name, description FROM categories");
+        $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode(['success' => true, 'categories' => $categories]);
+        break;
+
     case 'POST': // Thêm danh mục
         $category_name = $data['category_name'] ?? '';
         $description = $data['description'] ?? '';
