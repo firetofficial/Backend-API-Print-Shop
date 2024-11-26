@@ -646,8 +646,8 @@ d
 ### Endpoint: `GET /tamphuc/product/show_products.php`
 - **Request Headers:**
     - `Content-Type: application/json`
-- **Query Parameters:**
-    - `session_token`: (User session token)
+- **Request Body:**
+    - `session_token`: (User session token to verify the request)
 - **Response:**
     ```json
     {
