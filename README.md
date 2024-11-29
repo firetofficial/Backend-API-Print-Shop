@@ -1,5 +1,5 @@
 # API Documentation - Backend PHP for Online Printing Website
-d
+jsonencode
 ## 1. **Login**
 ### Endpoint: `POST /tamphuc/api/login.php`
 - **Request Headers:**
