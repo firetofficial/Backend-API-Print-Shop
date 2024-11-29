@@ -313,24 +313,30 @@ d
 - **Request Body (raw JSON):**
     ```json
     {
-        "session_token": "your_session_token_here",
-        "customer_id": 1,
-        "recipient_name": "John Doe",
-        "recipient_phone": "1234567890",
-        "delivery_address": "123 Main St, Hanoi",
-        "order_status": 1,
-        "notes": "Urgent order",
-        "product_details": [
-            {
-                "product_code": "SP001",
-                "quantity": 10
-            },
-            {
-                "product_code": "SP002",
-                "quantity": 5
-            }
-        ]
-    }
+    "session_token": "146b70c9495d5a17ccf03c72016e6521e2a065f4cac766894495f88c8080315d",
+    "customer_id": 1,
+    "recipient_name": "John Doe",
+    "recipient_phone": "1234567890",
+    "delivery_address": "123 Main St, Hanoi",
+    "order_status": 1,
+    "notes": "Urgent order",
+    "product_details": [
+        {
+            "product_code": "SP001",
+            "quantity": 10,
+            "price": 11110
+        },
+        {
+            "product_code": "SP002",
+            "quantity": 5,
+            "price": 15000
+        }
+    ],
+    "processing_employee_id": 2,
+    "design_confirm_employee_id": 3,
+    "estimated_delivery_date": "2024-12-15"
+}
+
     ```
 
 ## 2. **Get Order**
