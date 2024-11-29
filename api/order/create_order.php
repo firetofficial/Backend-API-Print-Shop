@@ -17,6 +17,7 @@ function checkUserRole($session_token, $feature) {
            ['success' => false, 'message' => 'Không có quyền truy cập'];
 }
 
+// Nhận dữ liệu JSON từ request
 $data = json_decode(file_get_contents('php://input'), true);
 
 // Lấy dữ liệu từ body
@@ -29,18 +30,56 @@ $order_date = date('Y-m-d H:i:s');  // Ngày tạo đơn hàng
 $order_status = $data['order_status'] ?? 1;  // Mặc định là "Đang báo giá"
 $notes = $data['notes'] ?? '';
 $product_details = json_encode($data['product_details'] ?? []);
+$processing_employee_id = $data['processing_employee_id'] ?? null;
+$design_confirm_employee_id = $data['design_confirm_employee_id'] ?? null;
+$estimated_delivery_date = $data['estimated_delivery_date'] ?? null;
 
+// Kiểm tra quyền
 $roleCheck = checkUserRole($session_token, 'write');
 if (!$roleCheck['success'] || !$roleCheck['access_granted']) {
     echo json_encode(['success' => false, 'message' => 'Bạn không có quyền truy cập']);
     exit;
 }
 
-// Lưu đơn hàng vào cơ sở dữ liệu
-$sql = "INSERT INTO orders (customer_id, recipient_name, recipient_phone, delivery_address, order_date, order_status, notes, product_details)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-$stmt = $pdo->prepare($sql);
-$stmt->execute([$customer_id, $recipient_name, $recipient_phone, $delivery_address, $order_date, $order_status, $notes, $product_details]);
+// Kiểm tra dữ liệu bắt buộc
+if (empty($customer_id) || empty($recipient_name) || empty($recipient_phone) || empty($delivery_address) 
+    || empty($processing_employee_id) || empty($design_confirm_employee_id) || empty($estimated_delivery_date)) {
+    echo json_encode(['success' => false, 'message' => 'Thiếu thông tin bắt buộc']);
+    exit;
+}
 
-echo json_encode(['success' => true, 'message' => 'Đơn hàng đã được tạo thành công']);
+// Lưu đơn hàng vào cơ sở dữ liệu
+$sql = "INSERT INTO orders (
+            customer_id, 
+            recipient_name, 
+            recipient_phone, 
+            delivery_address, 
+            order_date, 
+            order_status, 
+            notes, 
+            product_details, 
+            processing_employee_id, 
+            design_confirm_employee_id, 
+            estimated_delivery_date
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$stmt = $pdo->prepare($sql);
+
+try {
+    $stmt->execute([
+        $customer_id, 
+        $recipient_name, 
+        $recipient_phone, 
+        $delivery_address, 
+        $order_date, 
+        $order_status, 
+        $notes, 
+        $product_details, 
+        $processing_employee_id, 
+        $design_confirm_employee_id, 
+        $estimated_delivery_date
+    ]);
+    echo json_encode(['success' => true, 'message' => 'Đơn hàng đã được tạo thành công']);
+} catch (PDOException $e) {
+    echo json_encode(['success' => false, 'message' => 'Lỗi khi tạo đơn hàng', 'error' => $e->getMessage()]);
+}
 ?>
