@@ -354,11 +354,13 @@ d
 - **Request Body (raw JSON):**
     ```json
     {
-        "session_token": "your_session_token_here",
-        "order_id": 1,
-        "order_status": 2,
-        "printing_company_id": 3
+    "session_token": "your_session_token_here",
+    "order_id": 1,
+    "order_status": 2,
+    "printing_company_id": 3,
+    "estimated_delivery_date": "2024-12-15"
     }
+
     ```
 
 ## 4. **Delete Order**
