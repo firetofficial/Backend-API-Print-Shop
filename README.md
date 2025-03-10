@@ -1,4 +1,25 @@
-# API Documentation - Backend PHP for Online Printing Website
+# Backend-API-Print-Shop 📄🖨️  
+
+## Backend API for Online Printing Website  
+
+Đây là hệ thống API được xây dựng bằng PHP để quản lý website in ấn trực tuyến. Hệ thống cung cấp đầy đủ các API để quản lý tài khoản nhân viên, khách hàng, đơn hàng, nhà in, danh mục sản phẩm, và nhiều chức năng khác.  
+
+## ✨ Tính năng chính  
+- 🔑 **Xác thực & Phân quyền**: Đăng nhập, tạo tài khoản, cập nhật quyền, kiểm tra vai trò người dùng.  
+- 👨‍💼 **Quản lý nhân viên**: Lấy danh sách, thêm, sửa, xóa tài khoản nhân viên.  
+- 👥 **Quản lý khách hàng**: Tạo, cập nhật, xóa khách hàng, truy vấn thông tin khách hàng.  
+- 🖨️ **Quản lý nhà in**: Thêm, cập nhật, xóa, lấy danh sách nhà in.  
+- 📦 **Quản lý đơn hàng**: Tạo, cập nhật trạng thái, xóa đơn hàng, truy vấn danh sách đơn hàng.  
+- 🔖 **Quản lý danh mục & sản phẩm**: Thêm, cập nhật, xóa danh mục sản phẩm, quản lý sản phẩm với nhiều mức giá.  
+
+
+## 🚀 Kết hợp với Frontend  
+API này được sử dụng cùng với repo **Frontend-Print-Shop** tại đây: [Frontend-Print-Shop](https://github.com/firetofficial/Frontend-Print-Shop).  
+
+**Frontend-Print-Shop** được xây dựng bằng **React + Vite**, cung cấp giao diện người dùng hiện đại, tối ưu hiệu suất. API này hoạt động như backend cho frontend, xử lý logic và dữ liệu của hệ thống in ấn trực tuyến.
+
+## 📌 Hướng dẫn sử dụng  
+API được tổ chức theo RESTful, sử dụng token xác thực để bảo vệ dữ liệu. Bạn có thể tham khảo chi tiết từng endpoint trong tài liệu API.  
 
 ## 1. **Login**
 ### Endpoint: `POST /tamphuc/api/login.php`
